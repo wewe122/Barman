@@ -8,7 +8,7 @@
 
 
 קישור לרכיבים הרשמיים:
-https://github.com/wewe122/Berman/blob/main/formal-elements.md
+https://github.com/wewe122/Barman/blob/main/formal-elements.md
 <div/>
 
 קישור למשחק:
