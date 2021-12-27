@@ -5,9 +5,9 @@ using UnityEngine;
 public class DrunksManager : MonoBehaviour
 {
     public GameObject drunkToSpawn;
-    public GameObject[] positions;
+    public Transform[] positions;
     public Sprite[] beersSprites;
-    public Vector3 startPosition;
+    public Transform startPosition;
     public float delayBetweenDrunks = 10f;
     public float DrunksSpeed;
     public bool instructionsMode = false;
@@ -15,20 +15,19 @@ public class DrunksManager : MonoBehaviour
     [SerializeField]
     public instructions instructions;
 
+    [SerializeField]
+    public GameManager gameManager;
 
-    private List<GameObject> drunks;
-    private int current = 0;
+    private Dictionary<int, GameObject> drunks;
+    private int currentPosition = -1;
     private float timer = 0;
+
     // Start is called before the first frame update
     void Start()
     {
         if (instructionsMode)
             return;
-        drunks = new List<GameObject>();
-        GameObject go = Instantiate(drunkToSpawn, startPosition, transform.rotation);
-        drunks.Add(go); 
-        go.transform.Find("dialogo/BeerDrunkWants").GetComponent<SpriteRenderer>().sprite =
-                beersSprites[current % beersSprites.Length];
+        drunks = new Dictionary<int, GameObject>();
     }
 
     // Update is called once per frame
@@ -37,23 +36,30 @@ public class DrunksManager : MonoBehaviour
         if (instructionsMode)
             return;
         timer += Time.deltaTime;
-        if (drunks[current].transform.position != positions[current].transform.position)
+        if (currentPosition > -1 && drunks[currentPosition].transform.position != positions[currentPosition].position)
             moveDrunk();
-        else if (timer > delayBetweenDrunks)
+        else if ((timer > delayBetweenDrunks || currentPosition == -1 && timer > delayBetweenDrunks / 2)
+                    && drunks.Count < 5)
         {
-            current = current < positions.Length - 1 ? current + 1 : 0;
+            // init new drunk
+            currentPosition = Random.Range(0, positions.Length);
+            while (drunks.ContainsKey(currentPosition))
+                currentPosition = Random.Range(0, positions.Length);
+            Debug.Log(currentPosition);
             timer = 0;
-            GameObject go = Instantiate(drunkToSpawn, startPosition, transform.rotation);
-            drunks.Add(go);
+            GameObject go = Instantiate(drunkToSpawn, startPosition.position, transform.rotation);
+            drunks.Add(currentPosition, go);
+            var t = Random.Range(0, beersSprites.Length);
+            Debug.Log("beer index: " + t);
             go.transform.Find("dialogo/BeerDrunkWants").GetComponent<SpriteRenderer>().sprite = 
-                beersSprites[current % beersSprites.Length];
+                beersSprites[t];
         }
     }
 
     void moveDrunk()
     {
-        drunks[current].transform.position = Vector2.MoveTowards(drunks[current].transform.position,
-                                                                 positions[current].transform.position,
+        drunks[currentPosition].transform.position = Vector2.MoveTowards(drunks[currentPosition].transform.position,
+                                                                 positions[currentPosition].position,
                                                                  DrunksSpeed * Time.deltaTime);
     }
     public void Serve(GameObject glass, GameObject drunk)
@@ -70,9 +76,11 @@ public class DrunksManager : MonoBehaviour
         {
             Destroy(drunk.transform.Find("dialogo").gameObject);
             Debug.Log("good serve");
+            gameManager.AddScore();
         }
         else
         {
+            gameManager.DecreaseScore();
             Debug.Log("bad serve");
         }
     }

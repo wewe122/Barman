@@ -4,22 +4,22 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Beer
+  - filledGlass
+  - emptyGlass
   - Drunk
-  - DumpHole
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Drunks
   - Water
   - UI
+  - Bar
   - 
   - 
-  - Drunk
-  - Barman
-  - Floor
-  - Hole
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -44,21 +44,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Floor
-    uniqueID: 1721824607
+  - name: drunks dialogo
+    uniqueID: 1243748383
     locked: 0
   - name: Drunks
-    uniqueID: 3467978191
-    locked: 0
-  - name: Barman
-    uniqueID: 1008284639
+    uniqueID: 3132245939
     locked: 0
   - name: UI
-    uniqueID: 180466867
+    uniqueID: 4166593197
+    locked: 0
+  - name: serving bar
+    uniqueID: 3812297167
     locked: 0
   - name: Objects
-    uniqueID: 2470703097
+    uniqueID: 2255826583
     locked: 0
-  - name: Hole
-    uniqueID: 1261749749
+  - name: Bar
+    uniqueID: 4292364821
     locked: 0
