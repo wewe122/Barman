@@ -13,7 +13,7 @@ https://github.com/wewe122/Barman/blob/main/formal-elements.md
 <div/>
 
 טריילר למשחק:
-
+https://youtu.be/UmoW66nJJMQ
 <div/>
 
 קישור למשחק:
