@@ -9,7 +9,7 @@
 ![Capture](https://user-images.githubusercontent.com/57321080/147882517-8f72bd27-df66-4cb5-ba52-29973ca4ce31.PNG)
 
 קישור לרכיבים הרשמיים:
-https://github.com/wewe122/Barman/blob/main/formal-elements.md
+https://github.com/wewe122/Bartender/blob/main/formal-elements.md
 <div/>
 
 טריילר למשחק:
