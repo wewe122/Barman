@@ -32,11 +32,8 @@ public class GlassManager : MonoBehaviour
     }
     void Start()
     {
-        if (!instructionsMode)
-        {
-            smallGlassQuantity = gameManager.smallGlassQuantity;
-            largeGlassQuantity = gameManager.largeGlassQuantity;
-        }
+        smallGlassQuantity = gameManager.smallGlassQuantity;
+        largeGlassQuantity = gameManager.largeGlassQuantity;
         uiManager.SetSmallGlassQuantity(smallGlassQuantity);
         uiManager.SetLargeGlassQuantity(largeGlassQuantity);
         SpacePressed = false;

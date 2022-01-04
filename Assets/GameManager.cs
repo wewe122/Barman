@@ -36,11 +36,13 @@ public class GameManager : MonoBehaviour
     private int CurrentScore = 0;
 
     public static GameManager gameManager;
+    public bool instructionsMode;
     void Awake()
     {
         if (gameManager == null)
             gameManager = this;
-        uiManager.SetTime(Mathf.FloorToInt(LevelTimeInSeconds / 60), Mathf.FloorToInt(LevelTimeInSeconds % 60));
+        if(!instructionsMode)
+            uiManager.SetTime(Mathf.FloorToInt(LevelTimeInSeconds / 60), Mathf.FloorToInt(LevelTimeInSeconds % 60));
     }
 
  
@@ -48,6 +50,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (instructionsMode)
+            return;
         LevelTimeInSeconds -= Time.deltaTime;
         if(LevelTimeInSeconds <= 0)
         {
