@@ -1260,7 +1260,7 @@ MonoBehaviour:
   - {fileID: 6202099065023635772, guid: d4745b502db4e7c44a97346209018ee8, type: 3}
   - {fileID: 3419436835179888336, guid: 54da20ad02cacf246be31935a08ec2bd, type: 3}
   startPosition: {fileID: 1160186961}
-  delayBetweenDrunks: 10
+  delayBetweenDrunks: 9
   DrunksSpeed: 6
   instructionsMode: 0
   instructions: {fileID: 0}
@@ -1927,8 +1927,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5bb8cd1ef80ca4abdda93efed75948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextLevelName: Level_2
-  CurrentLevelName: Level_1
+  NextLevelName: Level_3
+  CurrentLevelName: Level_2
 --- !u!4 &704248973
 Transform:
   m_ObjectHideFlags: 0
@@ -3193,12 +3193,12 @@ MonoBehaviour:
   congScreen: {fileID: 1877326453}
   TimeIsUpScreen: {fileID: 1528314224}
   uiManager: {fileID: 1391873782}
-  NumOfDrunks: 7
-  smallGlassQuantity: 5
-  largeGlassQuantity: 5
+  NumOfDrunks: 9
+  smallGlassQuantity: 7
+  largeGlassQuantity: 7
   scoreToAdd: 6
-  GoalScore: 32
-  LevelTimeInSeconds: 120
+  GoalScore: 45
+  LevelTimeInSeconds: 110
 --- !u!1 &993423993
 GameObject:
   m_ObjectHideFlags: 0

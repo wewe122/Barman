@@ -9,11 +9,13 @@ public class GlassManager : MonoBehaviour
     public GameObject[] glasses;
     public GameObject[] smallFilledGlasses;
     public GameObject[] largeFilledGlasses;
-    public int largeGlassQuantity = 0;
-    public int smallGlassQuantity = 0;
     public TextMeshProUGUI smallGlassTmp;
     public TextMeshProUGUI largeGlassTmp;
+    [SerializeField]
+    public GameManager gameManager;
 
+    private int largeGlassQuantity;
+    private int smallGlassQuantity;
     private bool SpacePressed;
     private float MinDistToLiftGlass = 10.146f;
     private float distToReleaseGlass = 10.3f;
@@ -30,6 +32,11 @@ public class GlassManager : MonoBehaviour
     }
     void Start()
     {
+        if (!instructionsMode)
+        {
+            smallGlassQuantity = gameManager.smallGlassQuantity;
+            largeGlassQuantity = gameManager.largeGlassQuantity;
+        }
         uiManager.SetSmallGlassQuantity(smallGlassQuantity);
         uiManager.SetLargeGlassQuantity(largeGlassQuantity);
         SpacePressed = false;

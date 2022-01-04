@@ -61,9 +61,9 @@ public class BeerManager : MonoBehaviour
                 glass.GetComponent<SpriteRenderer>().sortingLayerName = "Drunks";
                 glass.GetComponent<SpriteRenderer>().sortingOrder = 1;
                 glass.transform.position = closestDrunk.transform.position;
-                glass.GetComponent<Animator>().enabled = true;
-                drunkManager.Serve(glass, closestDrunk);
                 glassManager.ReleaseFullGlass();
+                if(drunkManager.Serve(glass, closestDrunk))
+                    glass.GetComponent<Animator>().enabled = true;
             }
             
         }

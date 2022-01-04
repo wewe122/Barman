@@ -13,14 +13,16 @@ public class tapController : MonoBehaviour
 
     private int currentTap = 0;
     private bool SpacePressed, TapsLocked;
-    private float PouringDistance = 1.29f;
+    private float PouringDistance = 1.5f;
     private const int RUBIA_INDEX = 0;
     private const int ROJA_INDEX = 1;
     private const int NEGRA_INDEX = 2;
+    private GameObject player;
     
     void Start()
     {
-        animator = GameObject.FindWithTag("Player").GetComponent<Animator>();
+        player = GameObject.FindWithTag("Player");
+        animator = player.GetComponent<Animator>();
         SpacePressed = false;
         TapsLocked = false;
     }
@@ -40,9 +42,9 @@ public class tapController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !SpacePressed && glassManager.isHoldingEmptyGlass())
         {
             SpacePressed = true;
-            var distToRubia = Vector3.Distance(taps[RUBIA_INDEX].position, GameObject.FindWithTag("Player").transform.position);
-            var distToRoja = Vector3.Distance(taps[ROJA_INDEX].position, GameObject.FindWithTag("Player").transform.position);
-            var distToNegra = Vector3.Distance(taps[NEGRA_INDEX].position, GameObject.FindWithTag("Player").transform.position);
+            var distToRubia = Vector3.Distance(taps[RUBIA_INDEX].position, player.transform.position);
+            var distToRoja = Vector3.Distance(taps[ROJA_INDEX].position, player.transform.position);
+            var distToNegra = Vector3.Distance(taps[NEGRA_INDEX].position, player.transform.position);
             Debug.Log("distToRubia: " + distToRubia + ", distToRoja: " + distToRoja + "\ndistToNegra: " + distToNegra);
 
             if (distToRubia <= PouringDistance)
@@ -80,14 +82,15 @@ public class tapController : MonoBehaviour
     }
     IEnumerator PourBeer()
     {
-        glassManager.ReleaseEmptyGlass();
         animator.SetBool("pouring", true);
+        Debug.Log("12323293856"+animator.GetBool("pouring"));
+        glassManager.ReleaseEmptyGlass();
         BarManMovement.ToggleFreezeMovement();
         yield return new WaitForSeconds(PouringDelay);
-        TapsLocked = false;// unlock taps
-        glassManager.FillGlass(currentTap);
         Debug.Log("Beer is Ready");
         animator.SetBool("pouring", false);
         BarManMovement.ToggleFreezeMovement();
+        TapsLocked = false;// unlock taps
+        glassManager.FillGlass(currentTap);
     }
 }

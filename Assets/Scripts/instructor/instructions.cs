@@ -75,7 +75,7 @@ public class instructions : MonoBehaviour
             missionTexts[current].gameObject.SetActive(true);
         else 
         {
-            SceneManager.LoadScene("firstScene");
+            SceneManager.LoadScene("Level_1");
             Debug.Log("next scene");
         }
     }

@@ -15,6 +15,15 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public UIManager uiManager;
 
+    [Tooltip("The amount of drunks to spawn in this level")]
+    public int NumOfDrunks;
+
+    [Tooltip("The amount of small glasses bartender can use to serve beer")]
+    public int smallGlassQuantity;
+    
+    [Tooltip("The amount of large glasses bartender can use to serve beer")]
+    public int largeGlassQuantity;
+
     [Tooltip("The amount of score that player recieve for single good serve")]
     public int scoreToAdd;
 

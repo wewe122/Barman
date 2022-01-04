@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6690855073749007891}
   - component: {fileID: 6690855073749007890}
   - component: {fileID: 2927042437755691740}
+  - component: {fileID: 782389647762410789}
   m_Layer: 0
   m_Name: small_negra_filled
   m_TagString: filledGlass
@@ -70,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2602475
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -6116947913722086253, guid: 65d48aaf99f450b47a236eb00b39191d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -102,3 +103,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &782389647762410789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6690855073749008108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 079b540159060cf4c8470ce29d56d7f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimationName: small_negra_drinking

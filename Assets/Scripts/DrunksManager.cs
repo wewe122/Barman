@@ -21,6 +21,8 @@ public class DrunksManager : MonoBehaviour
     private Dictionary<int, GameObject> drunks;
     private int currentPosition = -1;
     private float timer = 0;
+    private int drunksCount = 0;
+    private float KilingwaitingTime = 4f;
 
     // Start is called before the first frame update
     void Start()
@@ -39,18 +41,18 @@ public class DrunksManager : MonoBehaviour
         if (currentPosition > -1 && drunks[currentPosition].transform.position != positions[currentPosition].position)
             moveDrunk();
         else if ((timer > delayBetweenDrunks || currentPosition == -1 && timer > delayBetweenDrunks / 2)
-                    && drunks.Count < 5)
+                    && drunksCount < gameManager.NumOfDrunks && drunks.Count < positions.Length)
         {
             // init new drunk
             currentPosition = Random.Range(0, positions.Length);
             while (drunks.ContainsKey(currentPosition))
                 currentPosition = Random.Range(0, positions.Length);
-            Debug.Log(currentPosition);
             timer = 0;
+            drunksCount++;
             GameObject go = Instantiate(drunkToSpawn, startPosition.position, transform.rotation);
+            go.GetComponent<DrunkGoHome>().drunksManager = this;
             drunks.Add(currentPosition, go);
             var t = Random.Range(0, beersSprites.Length);
-            Debug.Log("beer index: " + t);
             go.transform.Find("dialogo/BeerDrunkWants").GetComponent<SpriteRenderer>().sprite = 
                 beersSprites[t];
         }
@@ -62,12 +64,12 @@ public class DrunksManager : MonoBehaviour
                                                                  positions[currentPosition].position,
                                                                  DrunksSpeed * Time.deltaTime);
     }
-    public void Serve(GameObject glass, GameObject drunk)
+    public bool Serve(GameObject glass, GameObject drunk)
     {
         if (instructions != null)
         {
             instructions.Serve(glass, drunk);
-            return;
+            return true;
         }
 
         Debug.Log(glass.GetComponent<SpriteRenderer>().sprite.name + ", " + drunk.transform.Find("dialogo/BeerDrunkWants").GetComponent<SpriteRenderer>().sprite.name);
@@ -77,11 +79,30 @@ public class DrunksManager : MonoBehaviour
             Destroy(drunk.transform.Find("dialogo").gameObject);
             Debug.Log("good serve");
             gameManager.AddScore();
+            return true;
         }
-        else
+        gameManager.DecreaseScore();
+        Debug.Log("bad serve");
+        return false;
+      
+    }
+    public void KillDrunk(GameObject drunk)
+    {
+        StartCoroutine(DestroyDrunk(drunk));
+    }
+    public IEnumerator DestroyDrunk(GameObject drunk)
+    {
+        yield return new WaitForSeconds(KilingwaitingTime);
+        foreach (var item in drunks)
         {
-            gameManager.DecreaseScore();
-            Debug.Log("bad serve");
+            if(item.Value == drunk)
+            {
+                drunks.Remove(item.Key);
+                break;
+            }    
         }
+
+        Destroy(drunk);
+        Debug.Log("drunk is out");
     }
 }
